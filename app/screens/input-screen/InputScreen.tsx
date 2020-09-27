@@ -3,6 +3,8 @@ import { View } from 'react-native'
 import { NavigationProp } from '@react-navigation/native'
 import NavigationButton from '/Users/martegleditsch/LoveCalculator/app/components/buttons/NavigationButton'
 import InputField from '/Users/martegleditsch/LoveCalculator/app/components/InputField'
+import { checkForMatch } from '/Users/martegleditsch/LoveCalculator/app/api/index'
+import { setMatchResult } from '/Users/martegleditsch/LoveCalculator/app/db/match-results'
 
 type Props = {
   navigation: NavigationProp<any>
@@ -11,6 +13,14 @@ type Props = {
 function InputScreen(props: Props) {
   const [firstName, setFirstName] = useState<string>('')
   const [secondName, setSecondName] = useState<string>('')
+
+  async function onCheckMatchPressed() {
+    const result = await checkForMatch(firstName, secondName)
+    if (result) {
+      setMatchResult(result)
+    }
+    props.navigation.navigate('Result')
+  }
 
   return (
     <View style={{ marginHorizontal: 24, alignItems: 'center', justifyContent: 'center', flex: 1 }}>
@@ -29,7 +39,7 @@ function InputScreen(props: Props) {
         style={{ marginTop: 12 }}
       />
 
-      <NavigationButton onPress={() => props.navigation.navigate('Result')} text={'Er det match?'} />
+      <NavigationButton onPress={onCheckMatchPressed} text={'Er det match?'} />
     </View>
   )
 }
