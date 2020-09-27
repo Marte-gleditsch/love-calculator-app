@@ -32,7 +32,7 @@ function InputScreen(props: Props) {
       />
 
       <InputField
-        autoFocus
+        autoFocus={false}
         placeholder={'Person 2'}
         onTextChange={(text: string) => setSecondName(text)}
         value={secondName}

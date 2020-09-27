@@ -4,7 +4,7 @@ import React from 'react'
 import { useFonts, Inter_700Bold } from '@expo-google-fonts/inter'
 
 type Props = {
-  style: StyleProp<TextStyle>
+  style?: StyleProp<TextStyle>
   children: string
 }
 

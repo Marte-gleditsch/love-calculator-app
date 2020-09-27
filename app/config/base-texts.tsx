@@ -12,7 +12,7 @@ const text = {
   },
   large: {
     fontSize: 32,
-    lineHeight: 20,
+    lineHeight: 40,
   },
 }
 
