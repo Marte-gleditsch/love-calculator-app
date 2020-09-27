@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavigationProp } from '@react-navigation/native'
-import { View, TouchableOpacity } from 'react-native'
-import { SmallText } from '/Users/martegleditsch/LoveCalculator/app/components/index'
+import { View } from 'react-native'
+import NavigationButton from '/Users/martegleditsch/LoveCalculator/app/components/buttons/NavigationButton'
 
 type Props = {
   navigation: NavigationProp<any>
@@ -10,9 +10,7 @@ type Props = {
 function InitialScreen(props: Props) {
   return (
     <View style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}>
-      <TouchableOpacity onPress={() => props.navigation.navigate('Input')}>
-        <SmallText>{'Ja, jeg vil prøve'}</SmallText>
-      </TouchableOpacity>
+      <NavigationButton onPress={() => props.navigation.navigate('Input')} text={'Ja, jeg vil prøve'} />
     </View>
   )
 }
