@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import { NavigationProp } from '@react-navigation/native'
-import NavigationButton from '/Users/martegleditsch/LoveCalculator/app/components/buttons/NavigationButton'
-import InputField from '/Users/martegleditsch/LoveCalculator/app/components/InputField'
 import { checkForMatch } from '/Users/martegleditsch/LoveCalculator/app/api/index'
 import { setMatchResult } from '/Users/martegleditsch/LoveCalculator/app/db/match-results'
+import { InputField, NavigationButton } from '/Users/martegleditsch/LoveCalculator/app/components/index'
 
 type Props = {
   navigation: NavigationProp<any>
