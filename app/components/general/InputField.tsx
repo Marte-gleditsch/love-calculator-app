@@ -27,7 +27,7 @@ function InputField(props: Props) {
 const styles = StyleSheet.create({
   container: {
     borderBottomWidth: 1,
-    borderBottomColor: colors.black,
+    borderBottomColor: colors.darkGrey,
     width: '100%',
     paddingVertical: 12,
   },

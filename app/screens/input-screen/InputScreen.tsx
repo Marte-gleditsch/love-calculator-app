@@ -3,7 +3,8 @@ import { View } from 'react-native'
 import { NavigationProp } from '@react-navigation/native'
 import { checkForMatch } from '/Users/martegleditsch/LoveCalculator/app/api/index'
 import { setMatchResult } from '/Users/martegleditsch/LoveCalculator/app/db/match-results'
-import { InputField, NavigationButton } from '/Users/martegleditsch/LoveCalculator/app/components/index'
+import { InputField, NavigationButton, Logo } from '/Users/martegleditsch/LoveCalculator/app/components/index'
+import { colors } from '/Users/martegleditsch/LoveCalculator/app/config/colors'
 
 type Props = {
   navigation: NavigationProp<any>
@@ -22,23 +23,27 @@ function InputScreen(props: Props) {
   }
 
   return (
-    <View style={{ marginHorizontal: 24, alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-      <InputField
-        autoFocus
-        placeholder={'Person 1'}
-        onTextChange={(text: string) => setFirstName(text)}
-        value={firstName}
-      />
+    <View style={{ alignItems: 'center', flex: 1, justifyContent: 'space-between', marginBottom: 24, marginTop: 48 }}>
+      <Logo />
 
-      <InputField
-        autoFocus={false}
-        placeholder={'Person 2'}
-        onTextChange={(text: string) => setSecondName(text)}
-        value={secondName}
-        style={{ marginTop: 12 }}
-      />
+      <View style={{ width: '100%', paddingHorizontal: 24 }}>
+        <InputField
+          autoFocus
+          placeholder={'First person´s name'}
+          onTextChange={(text: string) => setFirstName(text)}
+          value={firstName}
+        />
 
-      <NavigationButton onPress={onCheckMatchPressed} text={'Er det match?'} />
+        <InputField
+          autoFocus={false}
+          placeholder={'Second person´s name'}
+          onTextChange={(text: string) => setSecondName(text)}
+          value={secondName}
+          style={{ marginTop: 48 }}
+        />
+      </View>
+
+      <NavigationButton onPress={onCheckMatchPressed} text={'Check if it`s a match'} />
     </View>
   )
 }
