@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   illustration: {
     position: 'absolute',
-    height: 350,
+    height: 280,
     zIndex: 3,
   },
   text: {
