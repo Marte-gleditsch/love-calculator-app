@@ -31,6 +31,7 @@ function InputScreen(props: Props) {
           placeholder={'First person´s name'}
           onTextChange={(text: string) => setFirstName(text)}
           value={firstName}
+          index={0}
         />
 
         <InputField
@@ -39,6 +40,7 @@ function InputScreen(props: Props) {
           onTextChange={(text: string) => setSecondName(text)}
           value={secondName}
           style={{ marginTop: 48 }}
+          index={1}
         />
       </View>
 

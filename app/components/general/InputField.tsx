@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, TextInput, StyleSheet, StyleProp, ViewStyle } from 'react-native'
+import React, { useRef, useEffect } from 'react'
+import { TextInput, StyleSheet, StyleProp, ViewStyle, Animated, Easing } from 'react-native'
 import { colors } from '/Users/martegleditsch/LoveCalculator/app/config/colors'
 
 type Props = {
@@ -8,11 +8,66 @@ type Props = {
   value: string
   onTextChange: (text: string) => void
   style?: StyleProp<ViewStyle>
+  index: number
 }
 
 function InputField(props: Props) {
+  const scaleValue = useRef(new Animated.Value(0)).current
+  const translateYValue = useRef(new Animated.Value(0)).current
+  const animatedOpacityValue = useRef(new Animated.Value(0)).current
+
+  const animatedScaleValue = scaleValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0.9, 1],
+  })
+
+  const animatedTranslateYValue = translateYValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [10, 0],
+  })
+
+  const delayBetweenItems = 100
+
+  useEffect(() => {
+    Animated.sequence([
+      Animated.delay(props.index * delayBetweenItems),
+      Animated.parallel([
+        Animated.timing(animatedOpacityValue, {
+          easing: Easing.out(Easing.ease),
+          duration: 300,
+          delay: 300,
+          toValue: 1,
+          useNativeDriver: true,
+        }),
+        Animated.timing(scaleValue, {
+          easing: Easing.out(Easing.ease),
+          duration: 200,
+          delay: 300,
+          toValue: 1,
+          useNativeDriver: true,
+        }),
+        Animated.timing(translateYValue, {
+          easing: Easing.out(Easing.ease),
+          duration: 200,
+          delay: 300,
+          toValue: 1,
+          useNativeDriver: true,
+        }),
+      ]),
+    ]).start()
+  })
+
   return (
-    <View style={[styles.container, props.style]}>
+    <Animated.View
+      style={[
+        styles.container,
+        props.style,
+        {
+          opacity: animatedOpacityValue,
+          transform: [{ scale: animatedScaleValue }, { translateY: animatedTranslateYValue }],
+        },
+      ]}
+    >
       <TextInput
         autoCapitalize={'words'}
         autoFocus={props.autoFocus}
@@ -20,7 +75,7 @@ function InputField(props: Props) {
         value={props.value}
         onChangeText={props.onTextChange}
       />
-    </View>
+    </Animated.View>
   )
 }
 
