@@ -17,7 +17,7 @@ type Props = {
 
 function InitialScreen(props: Props) {
   return (
-    <View style={{ alignItems: 'center', flex: 1, justifyContent: 'center', marginBottom: 24, marginTop: 48 }}>
+    <View style={styles.container}>
       <Logo style={{ alignSelf: 'center' }} />
       <Blob size={800} color={colors.darkPink} style={styles.blob1} />
       <Blob size={800} color={colors.orange} style={styles.blob2} />
@@ -26,7 +26,7 @@ function InitialScreen(props: Props) {
 
       <View style={styles.text}>
         <LargeTextBold>{'Is it love?'}</LargeTextBold>
-        <SmallText>{'Are you sure he is the one? Or do you wonder if your crush is worth fighting for?'}</SmallText>
+        <SmallText>{'Are you sure he or she is the one for you? Is your crush worth fighting for?'}</SmallText>
       </View>
 
       <NavigationButton onPress={() => props.navigation.navigate('Input')} text={'Continue'} />
@@ -35,6 +35,13 @@ function InitialScreen(props: Props) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    marginBottom: 24,
+    marginTop: 48,
+  },
   blob1: {
     position: 'absolute',
     left: -120,
