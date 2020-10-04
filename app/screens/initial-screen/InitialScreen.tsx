@@ -18,7 +18,7 @@ type Props = {
 function InitialScreen(props: Props) {
   return (
     <View style={styles.container}>
-      <Logo style={{ alignSelf: 'center' }} />
+      <Logo style={{ alignSelf: 'center' }} navigation={props.navigation} />
       <Blob size={800} color={colors.darkPink} style={styles.blob1} />
       <Blob size={800} color={colors.orange} style={styles.blob2} />
 

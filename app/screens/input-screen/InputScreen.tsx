@@ -23,7 +23,7 @@ function InputScreen(props: Props) {
 
   return (
     <View style={{ alignItems: 'center', flex: 1, justifyContent: 'space-between', marginBottom: 24, marginTop: 48 }}>
-      <Logo />
+      <Logo navigation={props.navigation} />
 
       <View style={{ width: '100%', paddingHorizontal: 24 }}>
         <InputField
