@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleProp, ViewStyle } from 'react-native'
-import { SmallTextBold } from '/Users/martegleditsch/LoveCalculator/app/components/index'
+import SmallTextBold from '/Users/martegleditsch/LoveCalculator/app/components/text/SmallTextBold'
 import { colors } from '/Users/martegleditsch/LoveCalculator/app/config/colors'
 
 type Props = {

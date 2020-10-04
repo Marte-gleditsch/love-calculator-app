@@ -4,7 +4,6 @@ import { NavigationProp } from '@react-navigation/native'
 import { checkForMatch } from '/Users/martegleditsch/LoveCalculator/app/api/index'
 import { setMatchResult } from '/Users/martegleditsch/LoveCalculator/app/db/match-results'
 import { InputField, NavigationButton, Logo } from '/Users/martegleditsch/LoveCalculator/app/components/index'
-import { colors } from '/Users/martegleditsch/LoveCalculator/app/config/colors'
 
 type Props = {
   navigation: NavigationProp<any>
