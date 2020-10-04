@@ -5,6 +5,7 @@ import { getMatchResult } from '/Users/martegleditsch/LoveCalculator/app/db/matc
 import {
   SmallText,
   LargeTextBold,
+  SmallTextBold,
   NavigationButton,
   Logo,
   Blob,
@@ -19,9 +20,10 @@ type Props = {
 function ResultScreen(props: Props) {
   const [result, setResult] = useState<LoveCalculatorResponse>()
   const [barometerWidth, setBarometerWidth] = useState<number>(0)
-  const animation = useRef(new Animated.Value(0)).current
+  const barometerValue = useRef(new Animated.Value(0)).current
+  const animatedOpacityValue = useRef(new Animated.Value(0)).current
 
-  const animatedValue = animation.interpolate({
+  const animatedBarometerValue = barometerValue.interpolate({
     inputRange: [0, 1],
     outputRange: [0, barometerWidth],
   })
@@ -31,14 +33,23 @@ function ResultScreen(props: Props) {
   }, [])
 
   useEffect(() => {
-    Animated.timing(animation, {
-      easing: Easing.out(Easing.ease),
-      duration: 1000,
-      toValue: 1,
-      delay: 700,
-      useNativeDriver: false,
-    }).start()
-  }, [result, animation])
+    Animated.parallel([
+      Animated.timing(barometerValue, {
+        easing: Easing.out(Easing.ease),
+        duration: 1000,
+        toValue: 1,
+        delay: 700,
+        useNativeDriver: false,
+      }),
+      Animated.timing(animatedOpacityValue, {
+        easing: Easing.ease,
+        duration: 300,
+        delay: 1400,
+        toValue: 1,
+        useNativeDriver: true,
+      }),
+    ]).start()
+  }, [result, barometerValue])
 
   async function getMatchResultFromCache() {
     const response = await getMatchResult()
@@ -59,13 +70,19 @@ function ResultScreen(props: Props) {
       <Blob size={800} color={colors.orange} style={styles.blob2} />
 
       <View style={{ alignItems: 'center', zIndex: 3 }}>
+        <SmallTextBold style={{ color: colors.white, marginBottom: 18, maxWidth: 300 }}>
+          {result.fname + ' + ' + result.sname}
+        </SmallTextBold>
+
         <View style={{ alignItems: 'flex-start' }}>
           <View style={styles.barometerOutline} />
-          <Animated.View style={[styles.barometerContent, { width: animatedValue }]} />
+          <Animated.View style={[styles.barometerContent, { width: animatedBarometerValue }]} />
         </View>
 
-        <LargeTextBold style={{ color: colors.white }}>{result.percentage + '% match'}</LargeTextBold>
-        <SmallText style={{ color: colors.white }}>{result.result}</SmallText>
+        <Animated.View style={{ opacity: animatedOpacityValue, alignItems: 'center' }}>
+          <LargeTextBold style={{ color: colors.white }}>{result.percentage + '% match'}</LargeTextBold>
+          <SmallText style={{ color: colors.white }}>{result.result}</SmallText>
+        </Animated.View>
       </View>
 
       <NavigationButton onPress={() => props.navigation.navigate('Input')} text={'New match'} />
